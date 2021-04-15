@@ -21,8 +21,11 @@ public class CodeGenApplication {
         String configPath;
         if(args.length > 0){
             configPath = args[0];
-            String property = System.getProperty("user.dir");
-            configPath= property+ File.separator+configPath;
+            // 不是绝对路径，只是文件名称，则需要拼接当前目录
+            if (!configPath.contains("/") && !configPath.contains("\\")) {
+                String property = System.getProperty("user.dir");
+                configPath= property+ File.separator+configPath;
+            }
         }else{
             configPath = "classpath:config.properties";
         }
